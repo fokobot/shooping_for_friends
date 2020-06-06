@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_for_friends/services/auth.dart';
+import 'package:shopping_for_friends/shared/loading.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -16,6 +17,7 @@ class _RegisterState extends State<Register> {
   String email = '';
   String password = '';
   String error = '';
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,18 +56,25 @@ class _RegisterState extends State<Register> {
               },
             ),
             SizedBox(height: 20.0),
-            RaisedButton(
-                onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    dynamic result = await _auth.registerWithEmailandPassword(
-                        email, password);
-                    if (result == null) {
-                      setState(() => error = 'please supply a valid email');
-                    }
-                  }
-                },
-                color: Colors.pink[400],
-                child: Text('Register', style: TextStyle(color: Colors.white))),
+            loading
+                ? Loading()
+                : RaisedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState.validate()) {
+                        setState(() => loading = true);
+                        dynamic result = await _auth
+                            .registerWithEmailandPassword(email, password);
+                        if (result == null) {
+                          setState(() {
+                            error = 'please supply a valid email';
+                            loading = false;
+                          });
+                        }
+                      }
+                    },
+                    color: Colors.pink[400],
+                    child: Text('Register',
+                        style: TextStyle(color: Colors.white))),
             SizedBox(
               height: 12.0,
             ),

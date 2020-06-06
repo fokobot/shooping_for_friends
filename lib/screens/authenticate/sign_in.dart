@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_for_friends/services/auth.dart';
+import 'package:shopping_for_friends/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -11,6 +12,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   //Text Field State
   String email = '';
@@ -55,18 +57,25 @@ class _SignInState extends State<SignIn> {
               },
             ),
             SizedBox(height: 20.0),
-            RaisedButton(
-                onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    dynamic result =
-                        await _auth.signInWithEmailandPassword(email, password);
-                    if (result == null) {
-                      setState(() => error = 'Could not sign In with those credentials');
-                    }
-                  }
-                },
-                color: Colors.pink[400],
-                child: Text('Sign In', style: TextStyle(color: Colors.white))),
+            loading
+                ? Loading()
+                : RaisedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState.validate()) {
+                        setState(() => loading = true);
+                        dynamic result = await _auth.signInWithEmailandPassword(
+                            email, password);
+                        if (result == null) {
+                          setState(() {
+                            error = 'Could not sign In with those credentials';
+                            loading = false;
+                          });
+                        }
+                      }
+                    },
+                    color: Colors.pink[400],
+                    child:
+                        Text('Sign In', style: TextStyle(color: Colors.white))),
             SizedBox(
               height: 12.0,
             ),
