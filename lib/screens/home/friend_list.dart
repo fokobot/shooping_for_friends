@@ -17,6 +17,6 @@ class _FriendListState extends State<FriendList> {
       itemBuilder: (context, index){
         return FriendTile(friend: friends[index]);
       },
-      );
+    );
   }
 }
