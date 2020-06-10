@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_for_friends/models/NotifierToShop.dart';
+import 'package:shopping_for_friends/models/cart_provider.dart';
 import 'package:shopping_for_friends/models/friend.dart';
 import 'package:shopping_for_friends/screens/home/friend_list.dart';
-import 'package:shopping_for_friends/screens/home/product_list.dart';
 import 'package:shopping_for_friends/screens/home/shopping.dart';
 import 'package:shopping_for_friends/services/auth.dart';
 import 'package:shopping_for_friends/services/database.dart';
 import 'package:provider/provider.dart';
 
+import 'lista_productos.dart';
+
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
 
-  final model = NofifierToShop();
+  final model = CartProvider();
+
   @override
   Widget build(BuildContext context) {
     void _goToShoppingList() {
@@ -46,7 +48,7 @@ class Home extends StatelessWidget {
                 label: Text('Logout')),
           ],
         ),
-        body: FriendList(),//ProductList(model),
+        body: ListaProductos(),
       ),
     );
   }

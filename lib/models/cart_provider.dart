@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shopping_for_friends/models/product.dart';
 
-class NofifierToShop extends ChangeNotifier{
+class CartProvider extends ChangeNotifier{
   final List<Product> toShop = [];
 
   void add(Product item) {

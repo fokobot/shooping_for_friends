@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_for_friends/models/NotifierToShop.dart';
+import 'package:shopping_for_friends/models/cart_provider.dart';
 import 'package:shopping_for_friends/screens/home/shopping_tile.dart';
 
 class ShoppingListForm extends StatefulWidget {
-  final NofifierToShop model;
+  final CartProvider model;
   ShoppingListForm(this.model);
 
   @override
@@ -12,7 +12,7 @@ class ShoppingListForm extends StatefulWidget {
 
 class _ShoppingListFormState extends State<ShoppingListForm> {
   //final _formKey = GlobalKey<FormState>();
-  NofifierToShop model;
+  CartProvider model;
   _ShoppingListFormState(this.model);
   @override
   Widget build(BuildContext context) {

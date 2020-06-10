@@ -1,23 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:shopping_for_friends/models/NotifierToShop.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_for_friends/models/cart_provider.dart';
 import 'package:shopping_for_friends/models/product.dart';
 
 class ProductTile extends StatefulWidget {
   @override
   final Product product;
-  final NofifierToShop model;
-  ProductTile({Key key, @required this.product, @required this.model})
-      : super(key: key);
-  _ProductTileState createState() => _ProductTileState(product, model);
+  final BuildContext context;
+
+  ProductTile({this.product, this.context});
+  // Crea estado del Widget
+  _ProductTileState createState() => _ProductTileState(product, context);
 }
 
 class _ProductTileState extends State<ProductTile> {
   Product product;
-  NofifierToShop model;
+  BuildContext context;
+
   bool check = false;
-  _ProductTileState(this.product, this.model);
+  _ProductTileState(this.product, this.context);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class _ProductTileState extends State<ProductTile> {
                   flex: 3,
                   child: ListTile(
                     title: Text(product.name),
-                    subtitle: Text("\$" + product.price.toInt().toString()),
+                    subtitle: Text("\$" + product.price.toDouble().toString()),
                   ),
                 ),
                 Expanded(
@@ -51,9 +54,11 @@ class _ProductTileState extends State<ProductTile> {
                           check = value;
                         });
                         if (value) {
-                          model.add(product);
+                          Provider.of<CartProvider>(context, listen: false)
+                              .add(product);
                         } else {
-                          model.pop(product);
+                          Provider.of<CartProvider>(context, listen: false)
+                              .pop(product);
                         }
                       },
                     ))
