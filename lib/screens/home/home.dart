@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_for_friends/models/NotifierToShop.dart';
 import 'package:shopping_for_friends/models/friend.dart';
 import 'package:shopping_for_friends/screens/home/product_list.dart';
 import 'package:shopping_for_friends/screens/home/shopping.dart';
@@ -8,6 +9,8 @@ import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
+
+  final model = NofifierToShop();
   @override
   Widget build(BuildContext context) {
     void _goToShoppingList() {
@@ -16,7 +19,7 @@ class Home extends StatelessWidget {
           builder: (context) {
             return Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: ShoppingListForm(),
+              child: ShoppingListForm(model),
             );
           });
     }
@@ -42,7 +45,7 @@ class Home extends StatelessWidget {
                 label: Text('Logout')),
           ],
         ),
-        body: ProductList(),
+        body: ProductList(model),
       ),
     );
   }

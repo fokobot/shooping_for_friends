@@ -11,7 +11,7 @@ class ProductsService{
       });
     
     if (response.statusCode == 200) {
-      print('${response.body}');
+      // print('${response.body}');
       Iterable json = jsonDecode(response.body);
       return json.map((product)=> Product.fromJson(product)).toList(); 
     
