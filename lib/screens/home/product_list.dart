@@ -5,7 +5,7 @@ import 'package:shopping_for_friends/models/product.dart';
 import 'package:shopping_for_friends/screens/home/product_tile.dart';
 
 class ProductList extends StatefulWidget {
-  NofifierToShop model;
+  final NofifierToShop model;
   ProductList(this.model);
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_for_friends/models/NotifierToShop.dart';
 import 'package:shopping_for_friends/models/friend.dart';
+import 'package:shopping_for_friends/screens/home/friend_list.dart';
 import 'package:shopping_for_friends/screens/home/product_list.dart';
 import 'package:shopping_for_friends/screens/home/shopping.dart';
 import 'package:shopping_for_friends/services/auth.dart';
@@ -45,7 +46,7 @@ class Home extends StatelessWidget {
                 label: Text('Logout')),
           ],
         ),
-        body: ProductList(model),
+        body: FriendList(),//ProductList(model),
       ),
     );
   }

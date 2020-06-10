@@ -29,6 +29,7 @@ dependencies:
   provider: ^3.0.0
   flutter_spinkit: ^4.1.2+1
   flutter_svg: ^0.17.4
+  numberpicker: ^1.2.0
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -3,7 +3,6 @@ import 'package:shopping_for_friends/screens/authenticate/Login/login_screen.dar
 import 'package:shopping_for_friends/screens/authenticate/Signup/components/background.dart';
 import 'package:shopping_for_friends/screens/authenticate/Signup/components/or_divider.dart';
 import 'package:shopping_for_friends/screens/authenticate/Signup/components/social_icon.dart';
-import 'package:shopping_for_friends/screens/authenticate/Signup/signup_screen.dart';
 import 'package:shopping_for_friends/screens/components/already_have_an_account_acheck.dart';
 import 'package:shopping_for_friends/screens/components/rounded_button.dart';
 import 'package:shopping_for_friends/screens/components/rounded_input_field.dart';
@@ -19,7 +18,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final AuthService _auth = AuthService();
-  final _formKey = GlobalKey<FormState>();
+  //final _formKey = GlobalKey<FormState>();
 
   //Text Field State
   String email = '';

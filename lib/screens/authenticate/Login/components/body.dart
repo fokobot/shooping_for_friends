@@ -16,7 +16,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final AuthService _auth = AuthService();
-  final _formKey = GlobalKey<FormState>();
+  //final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
   //Text Field State
