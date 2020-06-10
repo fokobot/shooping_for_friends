@@ -11,38 +11,34 @@ import 'product_tile.dart';
 class ListaProductos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => CartProvider(),
-        child: BaseView<ProductModel>(
-            onModelReady: (model) => _getData(context, model),
-            builder: (context, model, child) => Scaffold(
-                  appBar: AppBar(
-                    title: Text("Lista de Productos"),
-                    actions: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.exit_to_app),
-                        onPressed: () {
-                          print("Log Out");
-                          //Provider.of<AuthProvider>(context, listen: false).signOut();
-                        },
-                      ),
-                    ],
+    return BaseView<ProductModel>(
+        onModelReady: (model) => _getData(context, model),
+        builder: (context, model, child) => Scaffold(
+              appBar: AppBar(
+                title: Text("Lista de Productos"),
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.exit_to_app),
+                    onPressed: () {
+                      print("Log Out");
+                      //Provider.of<AuthProvider>(context, listen: false).signOut();
+                    },
                   ),
-                  body: model.state == ViewState.Busy
-                      ? Center(child: CircularProgressIndicator())
-                      : Center(
-                          child: model.products == null
-                              ? Text('No hay productos disponibles.')
-                              : Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    Expanded(
-                                        child: _list(context, model.products)),
-                                  ],
-                                )),
-                  drawer: Drawer(child: _drawer(context)),
-                )));
+                ],
+              ),
+              body: model.state == ViewState.Busy
+                  ? Center(child: CircularProgressIndicator())
+                  : Center(
+                      child: model.products == null
+                          ? Text('No hay productos disponibles.')
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                Expanded(child: _list(context, model.products)),
+                              ],
+                            )),
+              drawer: Drawer(child: _drawer(context)),
+            ));
   }
 
   void _getData(BuildContext context, ProductModel model) async {

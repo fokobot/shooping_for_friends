@@ -2,19 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:shopping_for_friends/models/product.dart';
 
 class CartProvider extends ChangeNotifier{
-  final List<Product> toShop = [];
+
+  final List<Product> cartList = [];
 
   void add(Product item) {
-    this.toShop.add(item);
+    this.cartList.add(item);
     notifyListeners();
   }
 
-  void pop(Product p){
-    this.toShop.removeWhere((element) => element.name == p.name);
+  void pop(Product item){
+    this.cartList.removeWhere((element) => element.name == item.name);
     notifyListeners();
   }
 
   int size(){
-    return toShop.length;
+    return cartList.length;
   }
 }

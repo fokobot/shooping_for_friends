@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopping_for_friends/models/cart_provider.dart';
 import 'package:shopping_for_friends/screens/home/shopping_tile.dart';
 
 class ShoppingListForm extends StatefulWidget {
-  final CartProvider model;
-  ShoppingListForm(this.model);
+  ShoppingListForm();
 
   @override
-  _ShoppingListFormState createState() => _ShoppingListFormState(model);
+  _ShoppingListFormState createState() => _ShoppingListFormState();
 }
 
 class _ShoppingListFormState extends State<ShoppingListForm> {
-  //final _formKey = GlobalKey<FormState>();
-  CartProvider model;
-  _ShoppingListFormState(this.model);
+  _ShoppingListFormState();
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: model.toShop.length,
-      itemBuilder: (context, index){
-        return ShoppingTile(shopping: model.toShop[index]);
-      },
+    return Consumer<CartProvider>(
+      builder: (context, cart, child) => ListView.builder(
+        itemCount: cart.cartList.length,
+        itemBuilder: (context, index) {
+          return ShoppingTile(shopping: cart.cartList[index]);
+        },
+      ),
     );
   }
 }
