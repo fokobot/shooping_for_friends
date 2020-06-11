@@ -4,6 +4,7 @@ import 'package:shopping_for_friends/base/base_model.dart';
 import 'package:shopping_for_friends/base/base_view.dart';
 import 'package:shopping_for_friends/models/cart_provider.dart';
 import 'package:shopping_for_friends/models/user.dart';
+import 'package:shopping_for_friends/screens/home/friend_main.dart';
 import 'package:shopping_for_friends/screens/home/shopping.dart';
 import 'package:shopping_for_friends/view_models/product_model.dart';
 
@@ -112,7 +113,9 @@ class ListaProductos extends StatelessWidget {
         ListTile(
           title: Text('Amigos'),
           onTap: () {
-            //Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => FriendMain())
+            );
           },
         ),
         ListTile(
