@@ -58,22 +58,22 @@ class _ProductTileState extends State<ProductTile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          FloatingActionButton(
+                          RaisedButton(
                             onPressed: add,
                             child: Icon(
                               Icons.add,
                               color: Colors.black,
                             ),
-                            backgroundColor: Colors.white,
+                            color: Colors.white,
                           ),
                           Text('$_n', style: TextStyle(fontSize: 60.0)),
-                          FloatingActionButton(
+                          RaisedButton(
                             onPressed: minus,
                             child: Icon(
                                 const IconData(0xe15b,
                                     fontFamily: 'MaterialIcons'),
                                 color: Colors.black),
-                            backgroundColor: Colors.white,
+                            color: Colors.white,
                           ),
                         ],
                       ),
