@@ -15,6 +15,18 @@ class ProductTile extends StatefulWidget {
 
 class _ProductTileState extends State<ProductTile> {
   Product product;
+  int _n = 0;
+  void add() {
+    setState(() {
+      _n++;
+    });
+  }
+
+  void minus() {
+    setState(() {
+      if (_n != 0) _n--;
+    });
+  }
 
   bool check = false;
   _ProductTileState(this.product);
@@ -24,7 +36,7 @@ class _ProductTileState extends State<ProductTile> {
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
       child: Card(
-        margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+        margin: EdgeInsets.fromLTRB(20.0, 6.0, 0.0, 0.0),
         child: Center(
           child: Container(
             child: new Row(
@@ -36,12 +48,35 @@ class _ProductTileState extends State<ProductTile> {
                     subtitle: Text("\$" + product.price.toDouble().toString()),
                   ),
                 ),
-                Expanded(
-                    child: NumberPicker.integer(
-                        initialValue: 1,
-                        minValue: 1,
-                        maxValue: 10,
-                        onChanged: (newValue) => print(newValue))),
+                Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: Container(
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          FloatingActionButton(
+                            onPressed: add,
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.black,
+                            ),
+                            backgroundColor: Colors.white,
+                          ),
+                          Text('$_n', style: TextStyle(fontSize: 60.0)),
+                          FloatingActionButton(
+                            onPressed: minus,
+                            child: Icon(
+                                const IconData(0xe15b,
+                                    fontFamily: 'MaterialIcons'),
+                                color: Colors.black),
+                            backgroundColor: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 Expanded(
                     flex: 1,
                     child: Checkbox(
