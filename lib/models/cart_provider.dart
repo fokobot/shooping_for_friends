@@ -6,6 +6,15 @@ import 'package:shopping_for_friends/models/product_cart.dart';
 class CartProvider extends ChangeNotifier {
   Map<String, Friend> carts = {};
   Map<String, ProductCart> cartList = {};
+  void sumar(Product item) {
+    this.cartList.update(item.name,
+        (existingValue) => ProductCart(quantity: existingValue.quantity + 1));
+  }
+
+  void restar(Product item) {
+    this.cartList.update(item.name,
+        (existingValue) => ProductCart(quantity: existingValue.quantity - 1));
+  }
 
   void addCart(Friend friend) {
     this.carts.putIfAbsent(friend.uid, () => friend);
@@ -14,11 +23,13 @@ class CartProvider extends ChangeNotifier {
   }
 
   void add(Product item, int quantity) {
-    this.cartList.putIfAbsent(item.name, () => ProductCart(
-        name: item.name,
-        category: item.category,
-        price: item.price,
-        quantity: quantity));
+    this.cartList.putIfAbsent(
+        item.name,
+        () => ProductCart(
+            name: item.name,
+            category: item.category,
+            price: item.price,
+            quantity: quantity));
     notifyListeners();
   }
 
@@ -27,7 +38,7 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void closeAll(){
+  void closeAll() {
     this.cartList.clear();
     this.carts.clear();
     notifyListeners();

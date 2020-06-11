@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_for_friends/models/cart_provider.dart';
 import 'package:shopping_for_friends/models/product.dart';
@@ -19,12 +18,16 @@ class _ProductTileState extends State<ProductTile> {
   void add() {
     setState(() {
       _n++;
+      Provider.of<CartProvider>(context, listen: false).sumar(product);
     });
   }
 
   void minus() {
     setState(() {
-      if (_n != 0) _n--;
+      if (_n != 0) {
+        _n--;
+        Provider.of<CartProvider>(context, listen: false).sumar(product);
+      }
     });
   }
 
@@ -87,7 +90,7 @@ class _ProductTileState extends State<ProductTile> {
                         });
                         if (value) {
                           Provider.of<CartProvider>(context, listen: false)
-                              .add(product, 1);
+                              .add(product, _n);
                         } else {
                           Provider.of<CartProvider>(context, listen: false)
                               .pop(product);
