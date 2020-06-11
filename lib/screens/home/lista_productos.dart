@@ -29,7 +29,6 @@ class ListaProductos extends StatelessWidget {
                   ),
                 ],
               ),
-              floatingActionButton: _floating(context, model),
               body: model.state == ViewState.Busy
                   ? Center(child: CircularProgressIndicator())
                   : Center(
@@ -76,28 +75,9 @@ class ListaProductos extends StatelessWidget {
       itemCount: items.length,
       itemBuilder: (context, posicion) {
         var element = items[posicion];
-        return ProductTile(product: element, context: context);
+        return ProductTile(product: element);
       },
     );
-  }
-
-  Widget _floating(BuildContext context, ProductModel model) {
-    return FloatingActionButton(
-        onPressed: () => _uploadShoppingCart(context, model),
-        tooltip: 'Guardar carrito de compra',
-        child: new Icon(Icons.save));
-  }
-
-  void _uploadShoppingCart(BuildContext context, ProductModel model) async {
-    final User user = Provider.of<User>(context);
-    final CartProvider cart = Provider.of<CartProvider>(context);
-
-    try {
-      await model.uploadShoppingCart(user, cart.cartList);
-    } catch (err) {
-      print("Ocurrió un error al subir.");
-      //Provider.of<AuthProvider>(context, listen: false).signOut();
-    }
   }
 
   Widget _drawer(BuildContext context) {

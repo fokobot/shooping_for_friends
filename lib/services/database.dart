@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shopping_for_friends/models/friend.dart';
-import 'package:shopping_for_friends/models/product.dart';
 import 'package:shopping_for_friends/models/product_cart.dart';
 
 class DatabaseService {
@@ -48,9 +47,9 @@ class DatabaseService {
         .setData({'user': uid, 'products': lista});
   }
 
-  Stream<List<ProductCart>> get shoppingCart {
+  Stream<List<ProductCart>> getShoppingCart(Friend friend) {
     return shoppingCartCollection
-        .where("user", isEqualTo: uid)
+        .where("user", isEqualTo: friend.uid)
         .snapshots()
         .map(_shoppingListFromSnapshot);
   }
@@ -58,11 +57,13 @@ class DatabaseService {
   // Shopping Cart
   List<ProductCart> _shoppingListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return ProductCart(
-          name: doc.data['nombre'],
-          price: doc.data['precio'],
-          quantity: doc.data['quantity'],
-          category: doc.data['category']);
-    }).toList();
+      List a = doc.data['products'];
+
+      return a.map((item) => ProductCart(
+          name: item['name'],
+          price: item['price'],
+          quantity: item['quantity'],
+          category: item['category'])).toList();
+    }).first;
   }
 }

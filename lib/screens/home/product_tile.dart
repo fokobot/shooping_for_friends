@@ -7,19 +7,17 @@ import 'package:shopping_for_friends/models/product.dart';
 
 class ProductTile extends StatefulWidget {
   final Product product;
-  final BuildContext context;
 
-  ProductTile({this.product, this.context});
+  ProductTile({this.product});
   // Crea estado del Widget
-  _ProductTileState createState() => _ProductTileState(product, context);
+  _ProductTileState createState() => _ProductTileState(product);
 }
 
 class _ProductTileState extends State<ProductTile> {
   Product product;
-  BuildContext context;
 
   bool check = false;
-  _ProductTileState(this.product, this.context);
+  _ProductTileState(this.product);
 
   @override
   Widget build(BuildContext context) {

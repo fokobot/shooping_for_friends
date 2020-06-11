@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_for_friends/models/friend.dart';
+import 'package:shopping_for_friends/screens/home/shopping_cart_friend.dart';
 
 class FriendTile extends StatelessWidget {
   final Friend friend;
@@ -18,6 +19,8 @@ class FriendTile extends StatelessWidget {
           ),
           title: Text(friend.name),
           subtitle: Text(friend.address),
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ShoppingCartFriend(friend: friend))),
         ),
       ),
     );

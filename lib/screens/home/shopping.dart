@@ -15,30 +15,40 @@ class ShoppingListForm extends StatelessWidget {
         onModelReady: (model) => _getData(context, model),
         builder: (context, model, child) => Scaffold(
               appBar: AppBar(title: Text("Mi carrito de compra")),
+              floatingActionButton: _floating(context, model),
               body: model.state == ViewState.Busy
                   ? Center(child: CircularProgressIndicator())
-                  : StreamProvider<List<ProductCart>>.value(
-                      value: model.shopping_cart,
-                      child: Consumer<CartProvider>(
-                          builder: (context, value, child) {
-                        return ListView.builder(
-                          itemCount: value.cartList.length,
-                          itemBuilder: (context, index) {
-                            //  List<ProductCart> l =
-                            // Provider.of<List<ProductCart>>(context);
-                            return ShoppingTile(
-                                producto: value.cartList[index]);
-                          },
-                        );
-                      })),
+                  : Consumer<CartProvider>(builder: (context, value, child) {
+                      return ListView.builder(
+                        itemCount: value.cartList.length,
+                        itemBuilder: (context, index) {
+                          //  List<ProductCart> l =
+                          // Provider.of<List<ProductCart>>(context);
+                          return ShoppingTile(producto: value.cartList[index]);
+                        },
+                      );
+                    }),
             ));
   }
 
-  void _getData(BuildContext context, ProductModel model) {
-    final User user = Provider.of<User>(context);
+  void _getData(BuildContext context, ProductModel model) {}
 
-    model.getShoppingCart(user).catchError((error) async {
-      await print("Error al obtener el carrito de compras.");
-    });
+  Widget _floating(BuildContext context, ProductModel model) {
+    return FloatingActionButton(
+        onPressed: () => _uploadShoppingCart(context, model),
+        tooltip: 'Guardar carrito de compra',
+        child: new Icon(Icons.save));
+  }
+
+  void _uploadShoppingCart(BuildContext context, ProductModel model) async {
+    final User user = Provider.of<User>(context);
+    final CartProvider cart = Provider.of<CartProvider>(context);
+
+    try {
+      await model.uploadShoppingCart(user, cart.cartList);
+    } catch (err) {
+      print("Ocurrió un error al subir.");
+      //Provider.of<AuthProvider>(context, listen: false).signOut();
+    }
   }
 }

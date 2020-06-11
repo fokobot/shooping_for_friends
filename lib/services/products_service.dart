@@ -1,4 +1,5 @@
 import 'package:shopping_for_friends/locator.dart';
+import 'package:shopping_for_friends/models/friend.dart';
 import 'package:shopping_for_friends/models/product_cart.dart';
 import 'package:shopping_for_friends/models/user.dart';
 import 'package:shopping_for_friends/services/api.dart';
@@ -25,8 +26,8 @@ class ProductService {
     await DatabaseService(uid: user.uid).uploadShoppingCart(cartList);
   }
 
-  Stream<List<ProductCart>> getShoppingCart(User user ){
+  Stream<List<ProductCart>> getShoppingCart(Friend friend, User user){
     print("Obteniendo carrito de compra.");
-    return DatabaseService(uid: user.uid).shoppingCart;
+    return DatabaseService(uid: user.uid).getShoppingCart(friend);
   }
 }

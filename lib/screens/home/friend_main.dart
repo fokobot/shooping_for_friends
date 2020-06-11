@@ -12,8 +12,7 @@ class FriendMain extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
-          title: Text('Shopping For Friends'),
-          backgroundColor: Colors.brown[400],
+          title: Text('Lista de amigos'),
           elevation: 0.0,
         ),
         body: FriendList(), //ProductList(model),
