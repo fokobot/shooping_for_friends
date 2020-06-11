@@ -1,9 +1,9 @@
 import 'package:shopping_for_friends/base/base_model.dart';
 import 'package:shopping_for_friends/locator.dart';
+import 'package:shopping_for_friends/models/user.dart';
 import 'package:shopping_for_friends/services/products_service.dart';
 
 import '../models/product.dart';
-
 
 class ProductModel extends BaseModel {
   ProductService _productService = locator<ProductService>();
@@ -23,4 +23,15 @@ class ProductModel extends BaseModel {
     }
   }
 
+  Future uploadShoppingCart(User user, List<Product> cartList) async {
+    setState(ViewState.Busy);
+    try {
+      await _productService.uploadShoppingCart(user, cartList);
+      setState(ViewState.Idle);
+      return Future.value(true);
+    } catch (err) {
+      setState(ViewState.Idle);
+      return Future.error(err.toString());
+    }
+  }
 }

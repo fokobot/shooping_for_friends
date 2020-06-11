@@ -6,7 +6,6 @@ import 'package:shopping_for_friends/models/cart_provider.dart';
 import 'package:shopping_for_friends/models/product.dart';
 
 class ProductTile extends StatefulWidget {
-  @override
   final Product product;
   final BuildContext context;
 

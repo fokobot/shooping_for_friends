@@ -1,12 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shopping_for_friends/models/friend.dart';
+import 'package:shopping_for_friends/models/product.dart';
 
 class DatabaseService {
+
   final String uid;
   DatabaseService({this.uid});
-  //Collection Reference
+
+  //Friends
   final CollectionReference friendCollection =
       Firestore.instance.collection('friends');
+
+  //Shopping Carts
+  final CollectionReference shoppingCartCollection =
+      Firestore.instance.collection('shopping_carts');
 
   Future updateUserData(String name, String address) async {
     return await friendCollection
@@ -22,22 +29,16 @@ class DatabaseService {
     }).toList();
   }
 
-  //userData from Snapshot
-  // UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
-  //   return UserData(
-  //       uid: uid,
-  //       name: snapshot.data['name'],
-  //       address: snapshot.data['address']);
-  // }
-
   //Get Friends Stream
   Stream<List<Friend>> get friends {
     return friendCollection.snapshots().map(_friendListFromSnapshot);
   }
 
-  //Get User Doc Stream
-  // Stream<UserData> get userData {
-  //   return friendCollection.document(uid).snapshots()
-  //   .map(_userDataFromSnapshot);
-  // }
+  Future uploadShoppingCart(List<Product> productos) async {
+    List<Map<String, dynamic>> lista = productos.map((Product item) => {'nombre': item.name, 'cantidad': 1, 'precio': item.price}).toList();
+    return await shoppingCartCollection
+        .document(uid)
+        .setData({'user': uid, 'productos': lista});
+  }
+
 }
