@@ -21,7 +21,7 @@ class ProductService {
     }
   }
 
-  Future uploadShoppingCart(User user, List<ProductCart> cartList) async {
+  Future uploadShoppingCart(User user, Map<String, ProductCart> cartList) async {
     print("Subir carrito de compra.");
     await DatabaseService(uid: user.uid).uploadShoppingCart(cartList);
   }

@@ -24,7 +24,9 @@ class DatabaseService {
   List<Friend> _friendListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Friend(
-          name: doc.data['name'] ?? '', address: doc.data['address'] ?? '', uid: doc.documentID);
+          name: doc.data['name'] ?? '',
+          address: doc.data['address'] ?? '',
+          uid: doc.documentID);
     }).toList();
   }
 
@@ -33,15 +35,17 @@ class DatabaseService {
     return friendCollection.snapshots().map(_friendListFromSnapshot);
   }
 
-  Future uploadShoppingCart(List<ProductCart> productos) async {
-    List<Map<String, dynamic>> lista = productos
-        .map((ProductCart item) => {
-              'name': item.name,
-              'quantity': item.quantity,
-              'price': item.price,
-              'category': item.category
-            })
-        .toList();
+  Future uploadShoppingCart(Map<String, ProductCart> productos) async {
+    List<Map<String, dynamic>> lista = [];
+    productos.forEach((key, item) {
+      lista.add({
+        'name': item.name,
+        'quantity': item.quantity,
+        'price': item.price,
+        'category': item.category
+      });
+    });
+    // Actualiza los productos
     return await shoppingCartCollection
         .document(uid)
         .setData({'user': uid, 'products': lista});
@@ -56,17 +60,18 @@ class DatabaseService {
 
   // Shopping Cart
   List<ProductCart> _shoppingListFromSnapshot(QuerySnapshot snapshot) {
+    if (snapshot.documents.length == 0) return null;
 
-    if(snapshot.documents.length == 0) return null;
-    
     return snapshot.documents.map((doc) {
       List a = doc.data['products'];
 
-      return a.map((item) => ProductCart(
-          name: item['name'],
-          price: item['price'],
-          quantity: item['quantity'],
-          category: item['category'])).toList();
+      return a
+          .map((item) => ProductCart(
+              name: item['name'],
+              price: item['price'],
+              quantity: item['quantity'],
+              category: item['category']))
+          .toList();
     }).first;
   }
 }

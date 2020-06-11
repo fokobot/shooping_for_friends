@@ -19,10 +19,11 @@ class ShoppingListForm extends StatelessWidget {
               body: model.state == ViewState.Busy
                   ? Center(child: CircularProgressIndicator())
                   : Consumer<CartProvider>(builder: (context, value, child) {
+                      List<ProductCart> productos = value.cartList.values.toList();
                       return ListView.builder(
-                        itemCount: value.cartList.length,
+                        itemCount: productos.length,
                         itemBuilder: (context, index) {
-                          return ShoppingTile(producto: value.cartList[index]);
+                          return ShoppingTile(producto: productos[index]);
                         },
                       );
                     }),

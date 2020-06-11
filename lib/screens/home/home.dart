@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_for_friends/models/cart_provider.dart';
-import 'package:shopping_for_friends/services/auth.dart';
-import 'package:shopping_for_friends/services/database.dart';
-import 'package:provider/provider.dart';
 
 import 'lista_productos.dart';
 

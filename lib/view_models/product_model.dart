@@ -11,8 +11,6 @@ class ProductModel extends BaseModel {
 
   List<Product> get products => _productService.products;
 
-  Stream<List<ProductCart>> shopping_cart;
-
   bool dataAvailable = true;
 
   Future getProducts() async {
@@ -27,7 +25,7 @@ class ProductModel extends BaseModel {
     }
   }
 
-  Future uploadShoppingCart(User user, List<ProductCart> cartList) async {
+  Future uploadShoppingCart(User user, Map<String, ProductCart> cartList) async {
     setState(ViewState.Busy);
     try {
       await _productService.uploadShoppingCart(user, cartList);

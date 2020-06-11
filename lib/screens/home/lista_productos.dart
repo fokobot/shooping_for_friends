@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shopping_for_friends/base/base_model.dart';
 import 'package:shopping_for_friends/base/base_view.dart';
-import 'package:shopping_for_friends/models/cart_provider.dart';
-import 'package:shopping_for_friends/models/user.dart';
 import 'package:shopping_for_friends/screens/home/friend_main.dart';
 import 'package:shopping_for_friends/screens/home/shopping.dart';
 import 'package:shopping_for_friends/screens/home/shopping_lists.dart';
@@ -92,7 +89,7 @@ class ListaProductos extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: Text('Amigos'),
+          title: Text('Mis Amigos'),
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => FriendMain())
@@ -100,7 +97,7 @@ class ListaProductos extends StatelessWidget {
           },
         ),
         ListTile(
-          title: Text('Mi Lista'),
+          title: Text('Mi Lista de Compra'),
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => ShoppingListForm()),
