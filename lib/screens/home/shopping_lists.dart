@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_for_friends/models/cart_provider.dart';
 import 'package:shopping_for_friends/models/friend.dart';
+import 'package:shopping_for_friends/models/user.dart';
 import 'package:shopping_for_friends/screens/home/friend_tile.dart';
+import 'package:shopping_for_friends/services/database.dart';
 
 class ShoppingLists extends StatelessWidget {
   @override
@@ -35,7 +37,11 @@ class ShoppingLists extends StatelessWidget {
   }
 
   void _cerrarCompra(BuildContext context) {
-    
+    User user= Provider.of<User>(context);
+    // Mis listas
+    Map<String, Friend> carts =  Provider.of<CartProvider>(context).carts;
+    // Eliminar listas de compra
+    DatabaseService(uid: user.uid).clearLists(carts);
     // Limpiar
     Provider.of<CartProvider>(context, listen: false).closeAll();
   }

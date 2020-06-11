@@ -6,6 +6,7 @@ import 'package:shopping_for_friends/services/auth.dart';
 
 import 'locator.dart';
 import 'models/user.dart';
+import 'shared/constants.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
       child: StreamProvider<User>.value(
         value: AuthService().user,
         child: MaterialApp(
+          theme: ThemeData(
+            primaryColor: kPrimaryColor,
+          ),
           home: Wrapper(),
         ),
       ),

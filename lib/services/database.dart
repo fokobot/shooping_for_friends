@@ -74,4 +74,17 @@ class DatabaseService {
           .toList();
     }).first;
   }
+
+  // Clear lists
+  Future clearLists(Map<String, Friend> carts) async {
+    // Elimina todas las listas de compra que el usuario añadió
+    WriteBatch wb = Firestore.instance.batch();
+    carts.forEach((key, value) {
+      wb.delete(shoppingCartCollection.document(key));
+    });
+    // Elimina la lista de compra propia
+    wb.delete(shoppingCartCollection.document(uid));
+    // Commit changes
+    wb.commit();
+  }
 }

@@ -18,7 +18,7 @@ class _ProductTileState extends State<ProductTile> {
   void add() {
     setState(() {
       _n++;
-      Provider.of<CartProvider>(context, listen: false).sumar(product);
+      Provider.of<CartProvider>(context, listen: false).sumar(product, _n);
     });
   }
 
@@ -26,7 +26,7 @@ class _ProductTileState extends State<ProductTile> {
     setState(() {
       if (_n != 0) {
         _n--;
-        Provider.of<CartProvider>(context, listen: false).sumar(product);
+        Provider.of<CartProvider>(context, listen: false).restar(product, _n);
       }
     });
   }

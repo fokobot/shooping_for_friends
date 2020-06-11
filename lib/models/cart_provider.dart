@@ -6,14 +6,31 @@ import 'package:shopping_for_friends/models/product_cart.dart';
 class CartProvider extends ChangeNotifier {
   Map<String, Friend> carts = {};
   Map<String, ProductCart> cartList = {};
-  void sumar(Product item) {
-    this.cartList.update(item.name,
-        (existingValue) => ProductCart(quantity: existingValue.quantity + 1));
+
+  void sumar(Product item, int quantity) {
+    if (cartList.containsKey(item.name)) {
+      this.cartList.update(
+          item.name,
+          (item) => ProductCart(
+              name: item.name,
+              category: item.category,
+              price: item.price,
+              quantity: item.quantity + 1));
+    } else {
+      add(item, quantity);
+    }
   }
 
-  void restar(Product item) {
-    this.cartList.update(item.name,
-        (existingValue) => ProductCart(quantity: existingValue.quantity - 1));
+  void restar(Product item, int quantity) {
+    if (cartList.containsKey(item.name)) {
+      this.cartList.update(
+          item.name,
+          (item) => ProductCart(
+              name: item.name,
+              category: item.category,
+              price: item.price,
+              quantity: item.quantity - 1));
+    }
   }
 
   void addCart(Friend friend) {

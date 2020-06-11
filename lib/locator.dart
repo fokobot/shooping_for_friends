@@ -8,7 +8,8 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   // Api
-  locator.registerLazySingleton(() => Api());
+  locator.
+  registerLazySingleton(() => Api());
 
   // Lazy Singletones
   locator.registerLazySingleton(() => ProductService());
