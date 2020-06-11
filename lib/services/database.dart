@@ -24,7 +24,7 @@ class DatabaseService {
   List<Friend> _friendListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Friend(
-          name: doc.data['name'] ?? '', address: doc.data['address'] ?? '');
+          name: doc.data['name'] ?? '', address: doc.data['address'] ?? '', uid: doc.documentID);
     }).toList();
   }
 
@@ -56,6 +56,9 @@ class DatabaseService {
 
   // Shopping Cart
   List<ProductCart> _shoppingListFromSnapshot(QuerySnapshot snapshot) {
+
+    if(snapshot.documents.length == 0) return null;
+    
     return snapshot.documents.map((doc) {
       List a = doc.data['products'];
 

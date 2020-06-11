@@ -6,6 +6,7 @@ import 'package:shopping_for_friends/models/cart_provider.dart';
 import 'package:shopping_for_friends/models/user.dart';
 import 'package:shopping_for_friends/screens/home/friend_main.dart';
 import 'package:shopping_for_friends/screens/home/shopping.dart';
+import 'package:shopping_for_friends/screens/home/shopping_lists.dart';
 import 'package:shopping_for_friends/view_models/product_model.dart';
 
 import '../../models/product.dart';
@@ -103,6 +104,14 @@ class ListaProductos extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => ShoppingListForm()),
+            );
+          },
+        ),
+        ListTile(
+          title: Text('Mis Listas'),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => ShoppingLists()),
             );
           },
         ),

@@ -25,7 +25,6 @@ class Api {
       for (Map i in data) {
         productsList.add(Product.fromJson(i));
       }
-      print('showCoursesService length ${productsList.length}');
       return productsList;
     } else {
       return Future.error(response.statusCode.toString());

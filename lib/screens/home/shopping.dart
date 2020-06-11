@@ -22,8 +22,6 @@ class ShoppingListForm extends StatelessWidget {
                       return ListView.builder(
                         itemCount: value.cartList.length,
                         itemBuilder: (context, index) {
-                          //  List<ProductCart> l =
-                          // Provider.of<List<ProductCart>>(context);
                           return ShoppingTile(producto: value.cartList[index]);
                         },
                       );
