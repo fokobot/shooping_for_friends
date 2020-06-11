@@ -7,17 +7,10 @@ import 'package:provider/provider.dart';
 import 'lista_productos.dart';
 
 class Home extends StatelessWidget {
-  final AuthService _auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CartProvider(),
-      child: Scaffold(
-        body: ListaProductos(),
-      ),
+    return Scaffold(
+      body: ListaProductos(),
     );
   }
-
-  
 }

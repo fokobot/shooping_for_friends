@@ -54,7 +54,7 @@ class _ProductTileState extends State<ProductTile> {
                         });
                         if (value) {
                           Provider.of<CartProvider>(context, listen: false)
-                              .add(product);
+                              .add(product, 1);
                         } else {
                           Provider.of<CartProvider>(context, listen: false)
                               .pop(product);

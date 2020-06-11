@@ -1,7 +1,7 @@
 import 'package:shopping_for_friends/locator.dart';
+import 'package:shopping_for_friends/models/product_cart.dart';
 import 'package:shopping_for_friends/models/user.dart';
 import 'package:shopping_for_friends/services/api.dart';
-import 'package:shopping_for_friends/services/auth.dart';
 import 'package:shopping_for_friends/services/database.dart';
 
 import '../models/product.dart';
@@ -20,8 +20,13 @@ class ProductService {
     }
   }
 
-  Future uploadShoppingCart(User user, List<Product> cartList) async {
+  Future uploadShoppingCart(User user, List<ProductCart> cartList) async {
     print("Subir carrito de compra.");
     await DatabaseService(uid: user.uid).uploadShoppingCart(cartList);
+  }
+
+  Stream<List<ProductCart>> getShoppingCart(User user ){
+    print("Obteniendo carrito de compra.");
+    return DatabaseService(uid: user.uid).shoppingCart;
   }
 }

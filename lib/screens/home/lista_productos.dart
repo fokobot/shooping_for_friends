@@ -4,6 +4,7 @@ import 'package:shopping_for_friends/base/base_model.dart';
 import 'package:shopping_for_friends/base/base_view.dart';
 import 'package:shopping_for_friends/models/cart_provider.dart';
 import 'package:shopping_for_friends/models/user.dart';
+import 'package:shopping_for_friends/screens/home/shopping.dart';
 import 'package:shopping_for_friends/view_models/product_model.dart';
 
 import '../../models/product.dart';
@@ -81,7 +82,7 @@ class ListaProductos extends StatelessWidget {
 
   Widget _floating(BuildContext context, ProductModel model) {
     return FloatingActionButton(
-        onPressed: () =>_uploadShoppingCart(context, model),
+        onPressed: () => _uploadShoppingCart(context, model),
         tooltip: 'Guardar carrito de compra',
         child: new Icon(Icons.save));
   }
@@ -117,10 +118,9 @@ class ListaProductos extends StatelessWidget {
         ListTile(
           title: Text('Mi Lista'),
           onTap: () {
-            /*Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => ProfessorsView()),
-                        );*/
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => ShoppingListForm()),
+            );
           },
         ),
       ],

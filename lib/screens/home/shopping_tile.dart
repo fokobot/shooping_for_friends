@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_for_friends/models/product.dart';
+import 'package:shopping_for_friends/models/product_cart.dart';
 
 class ShoppingTile extends StatelessWidget {
-  final Product shopping;
-  ShoppingTile({this.shopping});
+  final ProductCart producto;
+  ShoppingTile({this.producto});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,8 @@ class ShoppingTile extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
         child: ListTile(
-          title: Text(shopping.name),
-          subtitle: Text(shopping.price.toString()),
+          title: Text(producto.name),
+          subtitle: Text("Precio: ${producto.price}. Cantidad: ${producto.quantity}"),
         ),
       ),
     );
