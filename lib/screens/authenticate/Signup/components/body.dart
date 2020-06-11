@@ -23,6 +23,8 @@ class _BodyState extends State<Body> {
   //Text Field State
   String email = '';
   String password = '';
+  String name = '';
+  String address = '';
   String error = '';
   bool loading = false;
   @override
@@ -45,6 +47,18 @@ class _BodyState extends State<Body> {
                     height: size.height * 0.35,
                   ),
                   RoundedInputField(
+                    hintText: "Name",
+                    onChanged: (value) {
+                      setState(() => name = value);
+                    },
+                  ),
+                  RoundedInputField(
+                    hintText: "Address",
+                    onChanged: (value) {
+                      setState(() => address = value);
+                    },
+                  ),
+                  RoundedInputField(
                     hintText: "Your Email",
                     onChanged: (value) {
                       setState(() => email = value);
@@ -60,7 +74,7 @@ class _BodyState extends State<Body> {
                     press: () async {
                       setState(() => loading = true);
                       dynamic result = await _auth.registerWithEmailandPassword(
-                          email, password);
+                          email, password, name, address);
                       if (result == null) {
                         setState(() {
                           error = 'please supply a valid email';

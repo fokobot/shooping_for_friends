@@ -4,12 +4,15 @@ import 'package:shopping_for_friends/base/base_view.dart';
 import 'package:shopping_for_friends/screens/home/friend_main.dart';
 import 'package:shopping_for_friends/screens/home/shopping.dart';
 import 'package:shopping_for_friends/screens/home/shopping_lists.dart';
+import 'package:shopping_for_friends/services/auth.dart';
+import 'package:shopping_for_friends/shared/constants.dart';
 import 'package:shopping_for_friends/view_models/product_model.dart';
 
 import '../../models/product.dart';
 import 'product_tile.dart';
 
 class ListaProductos extends StatelessWidget {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return BaseView<ProductModel>(
@@ -20,8 +23,8 @@ class ListaProductos extends StatelessWidget {
                 actions: <Widget>[
                   IconButton(
                     icon: Icon(Icons.exit_to_app),
-                    onPressed: () {
-                      print("Log Out");
+                    onPressed: () async {
+                      await _auth.signOut();
                       //Provider.of<AuthProvider>(context, listen: false).signOut();
                     },
                   ),
@@ -85,15 +88,14 @@ class ListaProductos extends StatelessWidget {
         DrawerHeader(
           child: Text('Menú'),
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: kPrimaryColor,
           ),
         ),
         ListTile(
           title: Text('Mis Amigos'),
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => FriendMain())
-            );
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => FriendMain()));
           },
         ),
         ListTile(
